@@ -7,7 +7,7 @@ Management ingin memahami performa penjualan dari berbagai sudut - tren revenue,
 ## Business Questions
 
 **Revenue Trend**
-1. Bagaimana perkembangan revenue perusahaan dari waktu ke waktu — apakah tumbuh, stagnan, atau melambat?
+1. Bagaimana perkembangan revenue perusahaan dari waktu ke waktu. Apakah tumbuh, stagnan, atau melambat?
 2. Apakah ada pola musiman yang bisa dimanfaatkan untuk perencanaan bisnis?
 3. Pada periode mana pertumbuhan revenue mulai melambat atau melemah?
 
@@ -48,8 +48,8 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 |---|---|---|
 | Trend Bulanan | Deteksi anomali jangka pendek | Revenue bulanan cukup fluktuatif di luar pola musiman (contoh: Mei 2025 turun 41.3%) |
 | Trend per Region per Tahun | Menentukan apakah masalah bersifat lokal atau menyeluruh | Perlambatan growth (31%→4% YoY) terjadi merata di hampir semua region, bukan disebabkan 1 region tertentu |
-| Trend Kuartalan (QoQ) | Konfirmasi pola musiman untuk perencanaan stok/campaign | Pola musiman konsisten tiap tahun: revenue naik di kuartal yang mengandung Maret/April dan Desember |
-| Trend Kuartalan (YoY) | Melihat growth riil bebas gangguan musiman, menunjuk waktu spesifik | **Q2 2025 adalah satu-satunya kuartal dengan growth YoY negatif (-13%)** -layak jadi fokus investigasi lanjutan |
+| Trend Kuartalan (QoQ) | Konfirmasi pola musiman untuk perencanaan stok/campaign | Pola musiman konsisten tiap tahun: revenue naik di kuartal pada bulan Maret/April dan Desember |
+| Trend Kuartalan (YoY) | Melihat growth riil bebas gangguan musiman, menunjuk waktu spesifik | **Q2 2025 adalah satu-satunya kuartal dengan growth YoY negatif (-13%)** - Bisa menjadi fokus investigasi lanjutan |
 
 **Insight utama:** Analisis dari berbagai level (bulanan, kuartalan, tahunan, regional) secara konsisten menunjukkan perlambatan pertumbuhan bisnis sejak 2024 ke 2025. Pola musiman tetap konsisten sepanjang periode, sehingga tetap bisa diandalkan untuk perencanaan meski tren pertumbuhan jangka panjang perlu perhatian.
 
@@ -57,7 +57,7 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 
 | Region | Temuan | Insight | Saran |
 |---|---|---|---|
-| Jawa Barat | Pencapaian target terbaik (missed 17%), tapi revenue riil justru menurun (-7% di 2025) | Baik dari sisi target, namun tren penjualan aktualnya melemah — kemungkinan target belum mencerminkan kondisi terkini | Perlu ditelusuri penyebab penurunan revenue, dan target ke depan bisa disesuaikan dengan tren aktual |
+| Jawa Barat | Pencapaian target terbaik (missed 17%), tapi revenue riil justru menurun (-7% di 2025) | Baik dari sisi target, namun tren penjualan aktualnya melemah. Kemungkinan target belum mencerminkan kondisi terkini | Perlu ditelusuri penyebab penurunan revenue, dan target ke depan bisa disesuaikan dengan tren aktual |
 | Sulawesi | Paling sering gagal target (40%), tapi revenue-nya tumbuh paling stabil di antara semua region | Target yang ditetapkan kemungkinan kurang sejalan dengan kapasitas pertumbuhan aktual region ini | Target Sulawesi bisa ditinjau kembali agar lebih realistis |
 | Sumatera | Rata-rata pencapaian tertinggi (123%), tapi fluktuatif dan growth-nya melambat tajam | Rata-rata yang tinggi menutupi ketidakstabilan performa dari bulan ke bulan | Ada baiknya ditelusuri apa yang membedakan bulan-bulan kuat dan lemahnya |
 | Jawa Tengah | Rata-rata pencapaian terendah (107%), namun revenue riil relatif terjaga | Terlihat lemah dari sisi target, tapi performa penjualan sebenarnya tidak seburuk itu | Target Jawa Tengah mungkin perlu dievaluasi kembali |
