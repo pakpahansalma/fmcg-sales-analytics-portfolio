@@ -2,7 +2,7 @@
 
 ## Business Problem
 
-Management ingin memahami performa penjualan dari berbagai sudut — tren revenue, pencapaian target per region, efektivitas channel penjualan, dan kontribusi produk — untuk mengidentifikasi area yang tumbuh baik maupun area yang memerlukan perhatian lebih lanjut.
+Management ingin memahami performa penjualan dari berbagai sudut - tren revenue, pencapaian target per region, efektivitas channel penjualan, dan kontribusi produk - untuk mengidentifikasi area yang tumbuh baik maupun area yang memerlukan perhatian lebih lanjut.
 
 ## Business Questions
 
@@ -25,17 +25,17 @@ Management ingin memahami performa penjualan dari berbagai sudut — tren revenu
 
 ## Data
 
-- `sales_dataset.csv` — data transaksi (±12.500 baris, Januari 2023 – Juni 2026)
-- `sales_target.csv` — target penjualan bulanan per region
+- **`sales_dataset.csv`** - Data transaksi historis (±12.500 baris, Januari 2023 – Juni 2026). [Lihat Dataset Transaksi](./sales_dataset.csv)
+- **`sales_target.csv`** - Data target penjualan bulanan per region. [Lihat Target Penjualan](./sales_target.csv)
 
 Dataset dummy dibuat menggunakan Python, mensimulasikan transaksi penjualan FMCG (12 produk, 6 region, 4 sales channel) di Indonesia.
 
 ## Approach
 
-Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook **`Sales Performance & Regional Target Achievement Analysis.csv`** di Sheet **Performance Analysis**. Tahapan yang dilakukan:
+Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook - **`Sales Performance & Regional Target Achievement Analysis.csv`**](Sales Performance & Regional Target Achievement Analysis.csv) di Sheet **Performance Analysis**. Tahapan yang dilakukan:
 
 1. Data cleaning & validasi (konsistensi revenue, cost, harga per produk, kalibrasi target)
-2. Analisis tren revenue — bulanan, kuartalan (QoQ & YoY), dan tahunan
+2. Analisis tren revenue - bulanan, kuartalan (QoQ & YoY), dan tahunan
 3. Perhitungan Achievement % (Actual vs Target) per region per bulan
 4. Analisis kontribusi produk & kategori terhadap revenue
 5. Analisis performa channel (revenue, margin, AOV, discount)
@@ -49,7 +49,7 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 | Trend Bulanan | Deteksi anomali jangka pendek | Revenue bulanan cukup fluktuatif di luar pola musiman (contoh: Mei 2025 turun 41.3%) |
 | Trend per Region per Tahun | Menentukan apakah masalah bersifat lokal atau menyeluruh | Perlambatan growth (31%→4% YoY) terjadi merata di hampir semua region, bukan disebabkan 1 region tertentu |
 | Trend Kuartalan (QoQ) | Konfirmasi pola musiman untuk perencanaan stok/campaign | Pola musiman konsisten tiap tahun: revenue naik di kuartal yang mengandung Maret/April dan Desember |
-| Trend Kuartalan (YoY) | Melihat growth riil bebas gangguan musiman, menunjuk waktu spesifik | **Q2 2025 adalah satu-satunya kuartal dengan growth YoY negatif (-13%)** — layak jadi fokus investigasi lanjutan |
+| Trend Kuartalan (YoY) | Melihat growth riil bebas gangguan musiman, menunjuk waktu spesifik | **Q2 2025 adalah satu-satunya kuartal dengan growth YoY negatif (-13%)** -layak jadi fokus investigasi lanjutan |
 
 **Insight utama:** Analisis dari berbagai level (bulanan, kuartalan, tahunan, regional) secara konsisten menunjukkan perlambatan pertumbuhan bisnis sejak 2024 ke 2025. Pola musiman tetap konsisten sepanjang periode, sehingga tetap bisa diandalkan untuk perencanaan meski tren pertumbuhan jangka panjang perlu perhatian.
 
@@ -75,24 +75,24 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 | Frekuensi transaksi antar produk relatif merata, namun kontribusi revenue bervariasi jauh (1.9%-22.7%) | Perbedaan pendapatan antar produk lebih dipengaruhi oleh harga jual, bukan seberapa sering produk dibeli | Ada peluang mendorong nilai transaksi lewat strategi bundling produk kontribusi kecil dengan produk andalan |
 | Sabun Mandi Batang terjual cukup banyak namun kontribusi revenue paling kecil (1.9%) | Demand stabil, namun nilai kontribusinya terbatas karena berada di segmen harga rendah | Bisa dipertimbangkan sebagai kandidat produk bundling, mengingat demand-nya yang konsisten |
 
-**Insight utama:** Ketergantungan bisnis cukup tinggi pada kategori Food dan dua produk utama. Frekuensi pembelian antar produk relatif merata — perbedaan kontribusi pendapatan lebih disebabkan oleh harga jual, bukan popularitas produk. Ini membuka peluang strategi bundling untuk mendorong nilai transaksi secara lebih merata.
+**Insight utama:** Ketergantungan bisnis cukup tinggi pada kategori Food dan dua produk utama. Frekuensi pembelian antar produk relatif merata - perbedaan kontribusi pendapatan lebih disebabkan oleh harga jual, bukan popularitas produk. Ini membuka peluang strategi bundling untuk mendorong nilai transaksi secara lebih merata.
 
 ### 4. Channel Performance
 
-**Insight:** Direct dan Distributor adalah dua channel dengan kontribusi terbesar terhadap revenue dan profit. Direct unggul dari sisi skala (revenue & profit tertinggi), sementara Distributor sedikit lebih efisien dari sisi margin. Modern Trade dan Online berkontribusi lebih kecil, dengan Online menunjukkan margin terendah akibat kombinasi discount rata-rata tertinggi dan AOV yang justru paling besar — mengindikasikan strategi diskon di channel ini layak ditinjau kembali.
+**Insight:** Direct dan Distributor adalah dua channel dengan kontribusi terbesar terhadap revenue dan profit. Direct unggul dari sisi skala (revenue & profit tertinggi), sementara Distributor sedikit lebih efisien dari sisi margin. Modern Trade dan Online berkontribusi lebih kecil, dengan Online menunjukkan margin terendah akibat kombinasi discount rata-rata tertinggi dan AOV yang justru paling besar - mengindikasikan strategi diskon di channel ini layak ditinjau kembali.
 
-**Saran:** Direct dan Distributor tetap menjadi dua channel dengan kontribusi terbesar dan layak menjadi prioritas perhatian ke depan. Untuk Online, ada baiknya ditelusuri lebih lanjut efektivitas discount terhadap margin — apakah diskon besar benar-benar mendorong volume secara signifikan, atau justru menekan profitabilitas tanpa hasil yang sepadan.
+**Saran:** Direct dan Distributor tetap menjadi dua channel dengan kontribusi terbesar dan layak menjadi prioritas perhatian ke depan. Untuk Online, ada baiknya ditelusuri lebih lanjut efektivitas discount terhadap margin  apakah diskon besar benar-benar mendorong volume secara signifikan, atau justru menekan profitabilitas tanpa hasil yang sepadan.
 
 ## Overall Recommendations
 
-1. Prioritaskan investigasi lanjutan pada periode April–Juni 2025 untuk memahami faktor spesifik di balik penurunan revenue pada kuartal tersebut
+1. Prioritaskan investigasi lanjutan pada periode April-Juni 2025 untuk memahami faktor spesifik di balik penurunan revenue pada kuartal tersebut
 2. Tinjau kembali metode penetapan target per region, mengingat ditemukan beberapa region dengan pencapaian target dan tren revenue riil yang bertolak belakang (Jawa Barat, Sulawesi)
 3. Mulai eksplorasi penguatan kategori di luar Food untuk mengurangi risiko konsentrasi pendapatan
 4. Telusuri efektivitas strategi discount pada channel Online terhadap margin
 
 ## Limitations
 
-- Growth 2026 tidak dibandingkan langsung dengan tahun-tahun sebelumnya karena data baru mencakup Januari–Juni (partial year)
+- Growth 2026 tidak dibandingkan langsung dengan tahun-tahun sebelumnya karena data baru mencakup Januari-Juni (partial year)
 - Analisis kontribusi produk/region bersifat ringkasan sepanjang periode observasi; breakdown yang lebih granular per segmen dari waktu ke waktu berada di luar cakupan analisis ini
 - Beberapa insight bersifat hipotesis awal berdasarkan pola dalam data dummy, dan memerlukan data tambahan (misal data distribusi, aktivitas kompetitor) untuk validasi lebih lanjut
 - Tipe channel dan tipe customer (Retail/Wholesale) di-generate secara independen dalam dataset, sehingga pola AOV per channel mungkin tidak sepenuhnya merefleksikan dinamika bisnis riil
@@ -100,5 +100,5 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 ## Tools
 Excel (PivotTable, formula, conditional formatting)
 
-## File
-- **`Sales Performance & Regional Target Achievement Analysis.csv`** — seluruh hasil analisis, visualisasi, dan insight
+[## File
+- **`Sales Performance & Regional Target Achievement Analysis.csv`**](Sales Performance & Regional Target Achievement Analysis.csv)
