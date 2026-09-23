@@ -1,4 +1,4 @@
-# Sales Performance & Regional Target Achievement Analysis
+# Sales Performance & Regional Target Achievement Analysis using Microsoft Excel & SQL
 
 ## Business Problem
 
@@ -32,7 +32,7 @@ Dataset dummy dibuat menggunakan Python, mensimulasikan transaksi penjualan FMCG
 
 ## Approach
 
-Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook - **`Sales Performance & Regional Target Achievement Analysis.xlsx`** — [Unduh atau Lihat File](./Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx) di Sheet **Performance Analysis**. Tahapan yang dilakukan:
+Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook - - **`Sales Performance & Regional Target Achievement Analysis.xlsx`** — [Unduh atau Lihat File](./01.%20Sales%20Performance%20Anallysis/Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx) di Sheet **Performance Analysis**. Tahapan yang dilakukan:
 
 1. Data cleaning & validasi (konsistensi revenue, cost, harga per produk, kalibrasi target)
 2. Analisis tren revenue - bulanan, kuartalan (QoQ & YoY), dan tahunan
@@ -98,7 +98,13 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 - Tipe channel dan tipe customer (Retail/Wholesale) di-generate secara independen dalam dataset, sehingga pola AOV per channel mungkin tidak sepenuhnya merefleksikan dinamika bisnis riil
 
 ## Tools
-Excel (PivotTable, formula, conditional formatting)
+Excel (PivotTable, formula, conditional formatting) dan SQL (SQLite)
+
+## Catatan
+Seluruh analisis dikerjakan di Excel terlebih dahulu, kemudian direplikasi 
+menggunakan SQL untuk validasi hasil dan latihan penguasaan kedua tools. 
+Hasil dari kedua pendekatan konsisten satu sama lain.
 
 ## File
-- **`Sales Performance & Regional Target Achievement Analysis.xlsx`** — [Unduh atau Lihat File](./Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx)
+- **`Sales Performance Analysis using Microsoft Excel`** — [Unduh atau Lihat File](./01.%20Sales%20Performance%20Anallysis/Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx)
+- - **`Sales Performance Analysis using SQL`** — [Lihat File SQL](./01.%20Sales%20Performance%20Anallysis/using.sql.db)
