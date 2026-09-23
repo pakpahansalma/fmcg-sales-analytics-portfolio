@@ -25,8 +25,8 @@ Management ingin memahami performa penjualan dari berbagai sudut — tren revenu
 
 ## Data
 
-- `sales_dataset_portfolio.csv` — data transaksi (±12.500 baris, Januari 2023 – Juni 2026)
-- `sales_target_portfolio.csv` — target penjualan bulanan per region
+- `sales_dataset.csv` — data transaksi (±12.500 baris, Januari 2023 – Juni 2026)
+- `sales_target.csv` — target penjualan bulanan per region
 
 Dataset dummy dibuat menggunakan Python, mensimulasikan transaksi penjualan FMCG (12 produk, 6 region, 4 sales channel) di Indonesia.
 
