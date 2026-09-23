@@ -106,5 +106,5 @@ menggunakan SQL untuk validasi hasil dan latihan penguasaan kedua tools.
 Hasil dari kedua pendekatan konsisten satu sama lain.
 
 ## File
-- **`Sales Performance Analysis using Microsoft Excel`** — [Unduh atau Lihat File](./01.%20Sales%20Performance%20Anallysis/Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx)
-- - **`Sales Performance Analysis using SQL`** — [Lihat File SQL](./01.%20Sales%20Performance%20Anallysis/using.sql.db)
+- **`Sales Performance Analysis using Microsoft Excel`** — [Lihat File Excel](./01.%20Sales%20Performance%20Anallysis/Sales%20Performance%20%26%20Regional%20Target%20Achievement%20Analysis.xlsx)
+- **`Sales Performance Analysis using SQL`** — [Lihat File SQL](./01.%20Sales%20Performance%20Anallysis/using.sql.db)
