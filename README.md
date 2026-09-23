@@ -32,7 +32,7 @@ Dataset dummy dibuat menggunakan Python, mensimulasikan transaksi penjualan FMCG
 
 ## Approach
 
-Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook **`Performance Analysis.xlsx`**. Tahapan yang dilakukan:
+Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, formula, conditional formatting), tersimpan dalam workbook **`Sales Performance & Regional Target Achievement Analysis.csv`** di Sheet **Performance Analysis**. Tahapan yang dilakukan:
 
 1. Data cleaning & validasi (konsistensi revenue, cost, harga per produk, kalibrasi target)
 2. Analisis tren revenue — bulanan, kuartalan (QoQ & YoY), dan tahunan
@@ -101,4 +101,4 @@ Seluruh analisis, visualisasi, dan insight dikerjakan di Excel (PivotTable, form
 Excel (PivotTable, formula, conditional formatting)
 
 ## File
-- `Performance Analysis.xlsx` — seluruh hasil analisis, visualisasi, dan insight
+- **`Sales Performance & Regional Target Achievement Analysis.csv`** — seluruh hasil analisis, visualisasi, dan insight
