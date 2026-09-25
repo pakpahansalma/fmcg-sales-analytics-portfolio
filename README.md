@@ -1,4 +1,4 @@
-# Sales Performance & Regional Target Achievement Analysis using Microsoft Excel & SQL
+# 01. Sales Performance & Regional Target Achievement Analysis using Microsoft Excel & SQL
 
 ## Business Problem
 
@@ -111,7 +111,7 @@ Hasil dari kedua pendekatan konsisten satu sama lain.
 
 
 
-# Customer Segmentation & Retention Analysis
+# 02. Customer Segmentation & Retention Analysis
 
 > 🚧 **Status: Sedang dikerjakan.** README ini mencerminkan progress analisis sejauh ini dan akan terus diperbarui.
 
