@@ -111,6 +111,8 @@ Hasil dari kedua pendekatan konsisten satu sama lain.
 
 
 
+
+
 # 02. Customer Segmentation & Retention Analysis
 
 > 🚧 **Status: Sedang dikerjakan.** README ini mencerminkan progress analisis sejauh ini dan akan terus diperbarui.
@@ -130,10 +132,15 @@ Management ingin memahami perilaku pembelian customer — seberapa aktif mereka 
 3. Segmen customer mana yang memberikan kontribusi revenue terbesar?
 4. Apakah ada segmen customer yang berpotensi berisiko terhadap kontribusi revenue ke depan?
 
-**Repurchase Interval Analysis** *(sedang dikerjakan)*
+**Repurchase Interval Analysis**
 
 5. Berapa siklus wajar customer melakukan pembelian ulang, berdasarkan pola aktual di data?
-6. Berapa banyak customer yang pola pembeliannya masih sesuai siklus wajar, dan berapa yang mulai melambat?
+6. Berapa banyak customer yang pola pembeliannya masih sesuai siklus wajar (On-Time), dan berapa yang mulai melambat?
+7. Segmen mana (On-Time vs Melambat) yang menyumbang porsi revenue lebih besar?
+
+**Dormant/At-Risk Deep Dive** *(belum dikerjakan)*
+
+8. Customer bernilai tinggi mana yang mulai menunjukkan tanda perlambatan, dan berapa besar potensi revenue yang berisiko?
 
 ## Data
 
@@ -143,7 +150,7 @@ Menggunakan dataset yang sama dengan Project 1: `sales_dataset.csv`, fokus pada 
 
 1. Menghitung metrik dasar per customer: **Recency** (jarak waktu sejak transaksi terakhir), **Frequency** (jumlah transaksi), **Monetary** (total nilai transaksi) — dikenal sebagai analisis RFM
 2. Mengelompokkan customer ke dalam segmen berdasarkan Recency, dengan threshold yang ditentukan dari distribusi data aktual (bukan asumsi umum)
-3. Menganalisis interval pembelian ulang untuk memahami siklus beli yang wajar, sebagai dasar identifikasi customer yang mulai melambat dari kebiasaannya
+3. Menganalisis jeda waktu (interval) antar transaksi untuk memahami siklus beli yang wajar, sebagai dasar identifikasi customer yang mulai melambat dari kebiasaannya — bukan sekadar menghitung jumlah transaksi per tahun, karena metode tersebut kurang bisa membedakan customer secara bermakna (mayoritas customer aktif memang wajar bertransaksi lebih dari sekali per tahun)
 
 ## Key Findings (sejauh ini)
 
@@ -173,23 +180,47 @@ Threshold segmentasi ditentukan berdasarkan distribusi Recency aktual pada data 
 | Segmen At Risk (21% customer, 20% revenue) memiliki proporsi kontribusi yang seimbang dengan proporsi jumlahnya | Segmen ini masih berkontribusi wajar terhadap revenue, namun sudah menunjukkan tanda mulai jarang bertransaksi | Ada baiknya segmen ini ditelusuri lebih lanjut, mengingat statusnya berada di antara aktif dan berisiko hilang |
 | Segmen Dormant relatif kecil (6%), namun segmen Lost jauh lebih besar (16%, 348 juta revenue) | Customer yang mulai jarang bertransaksi tampak cenderung berpindah cepat menuju berhenti total, bukan menurun bertahap | Perlu ditelusuri lebih lanjut pada rentang waktu mana penurunan aktivitas customer biasanya mulai terjadi |
 
-### 3. Repurchase Interval Analysis *(in progress)*
+### 3. Repurchase Interval Analysis
 
-Analisis pendahuluan terhadap jarak waktu antar transaksi (di seluruh customer) menunjukkan:
+**Metodologi:** Jeda waktu (interval) antar transaksi dihitung untuk setiap customer, kemudian dianalisis pola keseluruhannya untuk menentukan "siklus wajar" pembelian ulang.
 
 | Statistik | Nilai |
 |---|---|
-| Rata-rata interval | 68.8 hari (~2.3 bulan) |
-| Median interval | 47 hari (~1.5 bulan) |
-| P75 (75% customer beli ulang dalam) | 93 hari (~3 bulan) |
-| P90 (90% customer beli ulang dalam) | 157 hari (~5 bulan) |
+| Jumlah data interval | 11.700 |
+| Minimum | 0 hari |
+| Maximum | 985 hari |
+| Rata-rata | 68.8 hari (~2.3 bulan) |
+| Median (P50) | 47 hari (~1.5 bulan) |
+| Standar Deviasi | 73 hari |
+| P75 | 93 hari (~3 bulan) |
+| P90 | 157 hari (~5 bulan) |
 
-Statistik ini akan digunakan sebagai dasar penentuan threshold untuk mengklasifikasikan customer ke dalam kategori "On-Time" (pola beli sesuai siklus wajar) vs "Melambat" (interval pembelian melebihi siklus wajar). Analisis lanjutan (klasifikasi per customer dan ringkasan kontribusi revenue tiap kategori) masih dalam pengerjaan.
+Distribusi interval bersifat *right-skewed* (rata-rata lebih tinggi dari median), menandakan mayoritas customer memiliki interval pendek, namun sebagian kecil memiliki interval sangat panjang yang menarik rata-rata ke atas.
+
+**Penentuan threshold:** Threshold "siklus wajar" ditetapkan pada **90 hari** (dibulatkan dari P75 = 93 hari), dengan pertimbangan bahwa titik ini mewakili batas kebiasaan mayoritas (75%) pelanggan — cukup ketat untuk menangkap sinyal dini, namun tidak terlalu longgar hingga mengabaikan customer yang sudah mulai menyimpang dari kebiasaan normalnya.
+
+**Hasil Klasifikasi:**
+
+| Repurchase Status | Jumlah Customer | % Customer | Total Revenue (Juta) | % Revenue |
+|---|---|---|---|---|
+| On-Time (≤ 90 hari) | 631 | 79% | 2,761 | 88% |
+| Melambat (> 90 hari) | 169 | 21% | 390 | 12% |
+| **Total** | **800** | | **3,151** | |
+
+*Catatan: Kategori "Hanya 1x Transaksi" tidak muncul dalam hasil karena tidak ada customer dengan frekuensi transaksi kurang dari 3 kali sepanjang periode observasi — karakteristik dari desain dataset simulasi ini.*
+
+**Insight utama:** Customer "On-Time" (79% dari total customer) menyumbang **88% dari total revenue**, sementara customer "Melambat" (21%) hanya menyumbang **12% revenue**. Gap ini lebih tajam dibanding segmentasi berbasis Recency semata (Active vs non-Active: 66% vs 34%), karena metrik interval menangkap **konsistensi pola pembelian** sepanjang waktu, bukan hanya kondisi terakhir. Temuan ini memperkuat hasil Customer Segmentation: revenue perusahaan sangat bergantung pada customer dengan pola belanja yang konsisten.
+
+| Temuan | Insight | Saran |
+|---|---|---|
+| Customer "On-Time" (79%) menyumbang 88% revenue; customer "Melambat" (21%) menyumbang 12% revenue | Customer dengan pola belanja konsisten menyumbang porsi revenue jauh lebih besar dibanding proporsi jumlahnya | Menjaga konsistensi pola belanja customer "On-Time" penting, mengingat kontribusinya yang sangat dominan terhadap revenue |
+| Kelompok "Melambat" (21% customer) tetap menyumbang 12% revenue (~390 juta) | Ada nilai revenue yang cukup berarti pada kelompok yang mulai menjauh dari pola belanja normalnya | Kelompok ini bisa menjadi kandidat untuk ditelusuri lebih lanjut, mengingat masih ada potensi revenue yang bisa dipertahankan |
 
 ## Limitations (sejauh ini)
 
 - Analisis Customer Acquisition Trend tidak dapat dijadikan indikator tren bisnis riil karena keterbatasan desain dataset (pool customer tetap)
 - Threshold segmentasi dan interval pembelian ditentukan berdasarkan pola dalam data dummy ini; penerapan pada data riil memerlukan validasi ulang terhadap distribusi datanya masing-masing
+- Tidak ditemukan customer dengan kategori "Hanya 1x Transaksi" pada dataset ini, sehingga analisis repurchase interval hanya mencakup customer dengan riwayat transaksi berulang
 
 ## Tools
 
@@ -197,6 +228,5 @@ Excel (PivotTable, formula, conditional formatting)
 
 ## Next Steps
 
-- Menyelesaikan analisis Repurchase Interval (klasifikasi On-Time vs Melambat per customer)
 - Dormant/At-Risk Customer Deep Dive — mengidentifikasi customer bernilai tinggi yang berpotensi berisiko
 - Replikasi analisis menggunakan SQL
