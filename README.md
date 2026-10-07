@@ -115,11 +115,11 @@ Hasil dari kedua pendekatan konsisten satu sama lain.
 
 # 02. Customer Segmentation & Retention Analysis
 
-> 🚧 **Status: Sedang dikerjakan.** README ini mencerminkan progress analisis sejauh ini dan akan terus diperbarui.
+> ✅ **Status: Selesai (Excel).** Versi SQL menyusul.
 
 ## Business Problem
 
-Management ingin memahami perilaku pembelian customer — seberapa aktif mereka bertransaksi, segmen mana yang paling berkontribusi terhadap revenue, dan seberapa besar risiko kehilangan customer bernilai tinggi — untuk mendukung strategi retensi yang lebih terarah.
+Management ingin memahami perilaku pembelian customer — seberapa aktif mereka bertransaksi, segmen mana yang paling berkontribusi terhadap revenue, dan seberapa besar risiko terhadap kontribusi revenue ke depan — untuk mendukung strategi retensi yang lebih terarah.
 
 ## Business Questions
 
@@ -138,9 +138,9 @@ Management ingin memahami perilaku pembelian customer — seberapa aktif mereka 
 6. Berapa banyak customer yang pola pembeliannya masih sesuai siklus wajar (On-Time), dan berapa yang mulai melambat?
 7. Segmen mana (On-Time vs Melambat) yang menyumbang porsi revenue lebih besar?
 
-**Dormant/At-Risk Deep Dive** *(belum dikerjakan)*
+**Dormant/At-Risk Deep Dive**
 
-8. Customer bernilai tinggi mana yang mulai menunjukkan tanda perlambatan, dan berapa besar potensi revenue yang berisiko?
+8. Customer mana yang menunjukkan tanda risiko tertinggi (kombinasi Segment At Risk dan Repurchase Status Melambat), dan berapa besar potensi revenue yang terpapar?
 
 ## Data
 
@@ -151,8 +151,9 @@ Menggunakan dataset yang sama dengan Project 1: `sales_dataset.csv`, fokus pada 
 1. Menghitung metrik dasar per customer: **Recency** (jarak waktu sejak transaksi terakhir), **Frequency** (jumlah transaksi), **Monetary** (total nilai transaksi) — dikenal sebagai analisis RFM
 2. Mengelompokkan customer ke dalam segmen berdasarkan Recency, dengan threshold yang ditentukan dari distribusi data aktual (bukan asumsi umum)
 3. Menganalisis jeda waktu (interval) antar transaksi untuk memahami siklus beli yang wajar, sebagai dasar identifikasi customer yang mulai melambat dari kebiasaannya — bukan sekadar menghitung jumlah transaksi per tahun, karena metode tersebut kurang bisa membedakan customer secara bermakna (mayoritas customer aktif memang wajar bertransaksi lebih dari sekali per tahun)
+4. Menggabungkan hasil Segmentation dan Repurchase Interval untuk mengidentifikasi customer dengan tingkat risiko tertinggi (kena kedua kriteria sekaligus)
 
-## Key Findings (sejauh ini)
+## Key Findings
 
 ### 1. Customer Acquisition Trend
 
@@ -216,11 +217,45 @@ Distribusi interval bersifat *right-skewed* (rata-rata lebih tinggi dari median)
 | Customer "On-Time" (79%) menyumbang 88% revenue; customer "Melambat" (21%) menyumbang 12% revenue | Customer dengan pola belanja konsisten menyumbang porsi revenue jauh lebih besar dibanding proporsi jumlahnya | Menjaga konsistensi pola belanja customer "On-Time" penting, mengingat kontribusinya yang sangat dominan terhadap revenue |
 | Kelompok "Melambat" (21% customer) tetap menyumbang 12% revenue (~390 juta) | Ada nilai revenue yang cukup berarti pada kelompok yang mulai menjauh dari pola belanja normalnya | Kelompok ini bisa menjadi kandidat untuk ditelusuri lebih lanjut, mengingat masih ada potensi revenue yang bisa dipertahankan |
 
-## Limitations (sejauh ini)
+### 4. Dormant/At-Risk Deep Dive
+
+**Metodologi:** Customer dikelompokkan ke dalam 3 level risiko berdasarkan kombinasi 2 kriteria sebelumnya (Segment dan Repurchase Status):
+
+| Risk Level | Kriteria |
+|---|---|
+| High Risk | Segment = "At Risk" **DAN** Repurchase Status = "Melambat" (kena dua-duanya) |
+| Medium Risk | Kena salah satu dari dua kriteria di atas |
+| Safe | Tidak kena keduanya |
+
+**Hasil:**
+
+| Risk Level | Jumlah Customer | % Customer | Total Revenue (Juta) | % Revenue | Avg Revenue/Customer |
+|---|---|---|---|---|---|
+| High Risk | 32 | 4% | 86 | 3% | Rp 2,69 juta |
+| Medium Risk | 273 | 34% | 849 | 27% | Rp 3,11 juta |
+| Safe | 495 | 62% | 2,216 | 70% | Rp 4,48 juta |
+| **Total** | **800** | | **3,151** | | Rp 3,94 juta |
+
+**Insight utama:** Berbeda dari dugaan awal, customer dengan risiko tertinggi (High Risk) ternyata **bukan customer bernilai paling tinggi** — rata-rata revenue mereka (Rp 2,69 juta) justru di bawah rata-rata keseluruhan (Rp 3,94 juta), dan jauh di bawah customer yang tergolong Safe (Rp 4,48 juta). Dari sisi skala dampak, kelompok **Medium Risk (34% customer, 27% revenue)** jauh lebih signifikan untuk diperhatikan dibanding High Risk (4% customer, 3% revenue), mengingat besarnya potensi revenue yang terpapar risiko di kelompok tersebut.
+
+| Temuan | Insight | Saran |
+|---|---|---|
+| High Risk hanya 32 customer (4%), menyumbang 3% revenue | Secara proporsi, dampak langsung terhadap revenue dari kelompok ini relatif kecil | Tetap dapat ditelusuri, namun skalanya tidak signifikan dibanding segmen lain |
+| Medium Risk jauh lebih besar — 273 customer (34%), menyumbang 27% revenue | Kelompok ini membawa potensi dampak revenue jauh lebih besar jika tidak ditangani, dibanding High Risk | Prioritas perhatian sebaiknya diarahkan ke kelompok Medium Risk, mengingat besarnya potensi revenue yang terpapar |
+| Rata-rata revenue customer High Risk lebih rendah dari customer Safe | Customer dengan nilai transaksi lebih tinggi cenderung memiliki pola pembelian yang lebih stabil | Tidak ditemukan indikasi bahwa customer paling bernilai sedang berisiko tinggi — kondisi retensi pada segmen ini relatif masih terjaga |
+
+## Overall Recommendations
+
+1. Prioritaskan penelusuran lebih lanjut pada kelompok **Medium Risk**, mengingat besarnya proporsi revenue yang terpapar (27%) dibanding High Risk (3%)
+2. Customer bernilai tinggi secara umum masih menunjukkan pola pembelian yang stabil — kondisi retensi pada segmen ini relatif terjaga dan dapat menjadi acuan pola ideal
+3. Pola perpindahan dari "mulai jarang" ke "berhenti total" yang cenderung cepat (temuan Customer Segmentation) tetap perlu menjadi perhatian, terlepas dari skala nilai revenue customer
+
+## Limitations
 
 - Analisis Customer Acquisition Trend tidak dapat dijadikan indikator tren bisnis riil karena keterbatasan desain dataset (pool customer tetap)
 - Threshold segmentasi dan interval pembelian ditentukan berdasarkan pola dalam data dummy ini; penerapan pada data riil memerlukan validasi ulang terhadap distribusi datanya masing-masing
 - Tidak ditemukan customer dengan kategori "Hanya 1x Transaksi" pada dataset ini, sehingga analisis repurchase interval hanya mencakup customer dengan riwayat transaksi berulang
+- Risk Level ditentukan hanya dari 2 dimensi (Segment dan Repurchase Status); faktor lain seperti jenis customer (Retail/Wholesale) atau kategori produk yang dibeli belum dimasukkan ke dalam analisis risiko ini
 
 ## Tools
 
@@ -228,5 +263,4 @@ Excel (PivotTable, formula, conditional formatting)
 
 ## Next Steps
 
-- Dormant/At-Risk Customer Deep Dive — mengidentifikasi customer bernilai tinggi yang berpotensi berisiko
 - Replikasi analisis menggunakan SQL
